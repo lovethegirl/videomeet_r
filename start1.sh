@@ -48,6 +48,8 @@ sudo chmod a+x setip
 python server.py >/dev/null &
 sleep 1
 cd /home/firefly/Desktop/videomeet/ChannelDetection
+chmod 777 gpioModule.sh
+sleep 0.1
 chmod a+x mychdet
 ./mychdet > /dev/null &
 sleep 0.1
@@ -60,7 +62,9 @@ chmod a+x myvideo
 ./myvideo > /dev/null &
 sleep 5
 cd /home/firefly/Desktop/videomeet/check_encoder
+chmod 777 gpioModule.sh
+sleep 0.1
 chmod a+x ch_encoder
 ./ch_encoder > /dev/null &
-sleep 1
+sleep 3
 vlc udp://@:10002
