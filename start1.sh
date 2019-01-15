@@ -60,7 +60,7 @@ sleep 0.1
 cd /home/firefly/Desktop/videomeet/UDPVideo
 chmod a+x myvideo
 ./myvideo > /dev/null &
-sleep 5
+sleep 3
 cd /home/firefly/Desktop/videomeet/check_encoder
 chmod 777 gpioModule.sh
 sleep 0.1
