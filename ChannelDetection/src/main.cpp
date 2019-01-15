@@ -75,7 +75,7 @@ void ChDetc(){
          In the actual server, it should be changed to 30001
         */
 	//ChDetsock.sendbuf(&sendbuf,sizeof(sendbuf),"99.1.1.101",30001);//change to 30001
-        int len = ChDetsock.sendbuf(&sendbuf,sizeof(sendbuf),"192.168.0.107",30001);//change to 30001
+        int len = ChDetsock.sendbuf(&sendbuf,sizeof(sendbuf),serverIP,serverPort);//change to 30001
 	std::cout<<len<<std::endl;
         //const char *cmd1 = "./gpioModule.sh 0 4_D5";
         //const char *cmd2 = "./gpioModule.sh 1 4_D5";
@@ -108,7 +108,7 @@ void ChDetc(){
 }
 
 int main(){
-        UDPSocket signal;//监听信号
+    UDPSocket signal;//监听信号
 	signal.create(sgport);
 	char sign_buf[100];
 	string localip_;

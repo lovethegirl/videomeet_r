@@ -21,6 +21,8 @@ using namespace std;
 
 unsigned short sport;
 unsigned short rport;
+unsigned short localport;
+string localip;
 string destip;
 uint8_t channel=0x01;
 char c = 0xFF;
@@ -94,12 +96,12 @@ void config()
 		tmp[index] = s;
 		++index;
 	}
-	rport = atoi(tmp[0].c_str());
+	rport = atoi(tmp[0].c_str());//信号端口号
 	cout << rport << endl;
-	sport = atoi(tmp[1].c_str());
+	sport = atoi(tmp[1].c_str());//视频数据转到本机拆解包端口号
 	cout << sport << endl;
 	destip = tmp[2];
-	cout << destip << endl;
+	cout << destip << endl;//本地IP
 }
 void *ChaDet_ACK(void *arg){
     cout<<"Thread ack is on!"<<endl;
@@ -111,12 +113,13 @@ void *ChaDet_ACK(void *arg){
     
     struct timeval timeout;
     fd_set fds;
-    
+    string clientip;
+    unsigned short clientport;
     while(1)
     {
 	
 	timeout.tv_usec = 0;
-        timeout.tv_sec = 10;
+        timeout.tv_sec = 100;
         
         FD_ZERO(&fds);
 	FD_SET(rsock.sock, &fds);
@@ -136,7 +139,7 @@ void *ChaDet_ACK(void *arg){
 	    default:
 		if(FD_ISSET(rsock.sock, &fds)){
 
-                    recvsize=rsock.recvbuf(buf,sizeof(buf),destip,rport);
+                    recvsize=rsock.recvbuf(buf,sizeof(buf),clientip,clientport);
         
                     //recv the buf and get the last 7 bits to know what codeID it is. 
                     int ID = 0;
@@ -147,7 +150,7 @@ void *ChaDet_ACK(void *arg){
 		    }
         	    //ACK to the sender
         	    char ack = 0xFF;
-                    int send = rsock.sendbuf(&ack,sizeof(char),destip,sport);
+                    int send = rsock.sendbuf(&ack,sizeof(char),clientip,clientport);
             	    memset(buf,0,100);
         
         	    //if the codeID is not in the map, insert it in the map
@@ -172,7 +175,6 @@ void *VideoTrans(void *arg){
     int recvsize;
     string recvIP;
     unsigned short recvport;
-    
     while(1){
 
         recvsize = Transock.recvbuf(recvbuf,50000,recvIP,recvport);
@@ -194,7 +196,7 @@ void *VideoTrans(void *arg){
         char num = (char)channelNumber;
 	recvbuf[0] = num;
         /* Here the destine IP and the destine port should be changed accoding to the json*/
-        int sendlen = Transock.sendbuf(recvbuf,recvsize,recvIP,recvport);
+        int sendlen = Transock.sendbuf(recvbuf,recvsize,destip,sport);
         cout<<sendlen<<endl;
         memset(recvbuf,0,sizeof(recvbuf));
     }
