@@ -73,7 +73,7 @@ def sendAjax2():
             ch2ip_str = json.dumps(ch2ip)
             print(ch2ip_str)
             HOST = '127.0.0.1'
-            PORT = 62000
+            PORT = 9212
             ADDR = (HOST, PORT)
             udp_signal_sock = socket(AF_INET, SOCK_DGRAM)
             udp_signal_sock.sendto(ch2ip_str.encode("utf-8"), ADDR)
