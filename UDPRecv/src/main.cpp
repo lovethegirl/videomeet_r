@@ -2,14 +2,16 @@
 #include"../include/recv_json.h"
 #include<vector>
 using namespace std;
-unsigned short sport=10002;// Ŀ��Port
-unsigned short rport=30002; //����Port
-unsigned short sgport = 31002;
-uint8_t channel;// Channel ��= 0x01;
+unsigned short sport=10002;// Video Port
+unsigned short rport=30002; // Recv Port
+unsigned short sgport = 31002;// signal Port
+uint8_t channel;// Channel_ID = 0x01;
 map<uint8_t, string>mapc_p;
+
+
 int main()
 {
-	UDPSocket signal;//�����ź�
+	UDPSocket signal;//signal socket
 	if(signal.create(sgport)<0)
     {
         cout<<"sock error"<<endl;
