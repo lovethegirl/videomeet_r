@@ -2,60 +2,14 @@
 #include"../include/recv_json.h"
 #include<vector>
 using namespace std;
-unsigned short sport=10002;// Ä¿µÄPort
-unsigned short rport=30002; //½ÓÊÕPort
+unsigned short sport=10002;// Ä¿ï¿½ï¿½Port
+unsigned short rport=30002; //ï¿½ï¿½ï¿½ï¿½Port
 unsigned short sgport = 31002;
-uint8_t channel;// Channel ºÅ= 0x01;
+uint8_t channel;// Channel ï¿½ï¿½= 0x01;
 map<uint8_t, string>mapc_p;
-/*void config()
-{
-	ifstream fin("json.txt", ios::in);
-	if (!fin.is_open())
-	{
-		cout << "Î´³É¹¦" << endl;
-		return;
-	}
-	vector<string>tmp;
-	string s;
-	int index = 0;
-	while (getline(fin, s))
-	{
-		tmp.push_back(s);
-	}
-	rport = atoi(tmp[0].c_str());
-	cout << rport << endl;
-	sport = atoi(tmp[1].c_str());
-	cout << sport << endl;
-	for (int i = 2; i < tmp.size() - 1; i+=2)
-	{
-		destip = tmp[i];
-		cout << destip << endl;
-		unsigned short channel_ = atoi(tmp[i+1].c_str());
-		channel = (uint8_t)(channel_);
-		cout << channel << endl;
-		mapc_p[channel] = destip;
-	}
-	/*destip = tmp[2];
-	cout << destip << endl;
-	unsigned short channel_ = atoi(tmp[3].c_str());
-    channel=(uint8_t)(channel_);
-    cout<<channel<<endl;
-	mapc_t[channel] = destip;
-	destip = tmp[4];
-	cout << destip << endl;
-	unsigned short channel_ = atoi(tmp[5].c_str());
-	channel = (uint8_t)(channel_);
-	mapc_p[channel] = destip;
-	destip = tmp[6];
-	cout << destip << endl;
-	unsigned short channel_ = atoi(tmp[7].c_str());
-	channel = (uint8_t)(channel_);
-	mapc_p[channel] = destip;
-	fin.close();
-}*/
 int main()
 {
-	UDPSocket signal;//¼àÌýÐÅºÅ
+	UDPSocket signal;//ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½
 	if(signal.create(sgport)<0)
     {
         cout<<"sock error"<<endl;

@@ -113,12 +113,6 @@ int main(int argc, char *argv[])
 			memcpy(sendbuf + 1, recvbuf, recvsize + 1);
 			printf("the length is %d,the count is %d\n", recvsize, count);
 			++count;
-			//printf("buf1 %x,buf2 is%x",recvbuf[0]&0xff,recvbuf[1]&0xff);
-			//uint16_t n=ntohs(*(uint16_t*)recvbuf);
-			//printf("buf is %x\n",n);
-			//printf("buf1 is %x,buf2 is %x\n",n&0xff00,n&0x00ff);
-			//printf("the group ip",inet_ntoa())
-			// sendto(ssockfd,recvbuf, recvsize, 0, (struct sockaddr *)&ssin, sizeof(ssin));
 			int ret = ssock.sendbuf(sendbuf, recvsize + 1, dstaddr, dstport);
 			// std::cout<<ret<<std::endl;
 			// printf("the sendbuf length is %d\n",ret);
